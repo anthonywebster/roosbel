@@ -1,0 +1,396 @@
+body {
+    font-family: Helvetica,Verdana,Arial, sans-serif;
+}
+a, a:active, a:visited {
+    color: #9D9C9C;
+    text-decoration: none;
+}
+
+strong {
+    font-weight: bold;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+#container {
+    margin: auto;
+    width: 960px;
+}
+#content ul, #content ol {
+    /* margin-left: 2em; */
+}
+ol {
+    list-style-type: decimal;
+}
+::-moz-selection {
+    background: #FF5E99;
+    color: #fff;
+    text-shadow: none;
+}
+::selection {
+    background: #FF5E99;
+    color: #fff;
+    text-shadow: none;
+}
+a:link {
+    -webkit-tap-highlight-color: #FF5E99;
+}
+header {
+    height: 105px;
+    border-bottom: 1px solid #E3E3E3;
+    border-top: 1px solid #E3E3E3;
+    margin-top: 9px;
+}
+header h1 {
+    width: 178px;
+    height: 96px;
+    background: url('../img/logo_white.jpg') no-repeat scroll;
+    position: absolute;
+    top: 14px;
+    overflow: hidden;
+    background-size: 100% 100%;
+    margin-top: 0;
+}
+
+#pagemenu {
+    float: right;
+}
+#pagemenu ul {
+    /* padding-top: 0; */
+    line-height: 105px;
+}
+#pagemenu ul li {
+    display: inline;
+}
+
+#pagemenu ul li a {
+    font-size: 14px;
+    padding: 15px 10px 18px 10px;
+}
+
+#pagemenu ul li a:hover {
+    background: #15398f;
+    color: #FFFFFF;
+}
+
+div#gallery {
+    margin-top: 15px;
+}
+
+div#gallery p {
+    color: #898;
+    font-size: 14px;
+    margin-bottom: 0 5px 5px 0;
+}
+
+#content div#gallery ul {
+    margin: 0 10px;
+}
+
+.graduallyView {
+    width: 675px;
+    padding: 10px;
+    background: #ffffff;
+    -moz-box-shadow: 0px 0px 10px #333333;
+    -webkit-box-shadow: 0px 0px 10px #333333;
+    box-shadow: 0px 0px 10px #333333;
+    margin: 15px auto 10px auto;
+    clear: both;
+}
+
+.graduallyImages {
+    list-style: none;
+    height: 250px;
+    margin: 0px;
+    padding: 0px;
+}
+.graduallyImages .source {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 650px;
+    height: 230px;
+}
+
+.graduallyImages li {
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    height: 240px;
+    display: inline;
+}
+.graduallyController {
+    list-style: none;
+    margin: 10px auto;
+    padding: 0px;
+    text-align: center;
+}
+#gallery .graduallyController li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+#gallery .graduallyThumbnails li a:hover {
+    cursor: pointer;
+}
+
+.graduallyController .first {
+    margin-left: 0px;
+}
+
+.graduallyController .prev {
+    padding-right: 15px;
+}
+
+.graduallyController .next {
+    padding-left: 15px;
+}
+
+.graduallyController .prev,
+.graduallyController .next {
+    vertical-align: middle;
+}
+
+.graduallyController .prev a,
+.graduallyController .next a {
+    width: 29px;
+    height: 29px;
+    text-indent: -9999px;
+    display: inline-block;
+}
+
+.graduallyController .prev a {
+    background: url(../img/btn_prev_next.gif) no-repeat left top;
+}
+
+.graduallyController .next a {
+    background: url(../img/btn_prev_next.gif) no-repeat -30px top;
+}
+
+.graduallyController .prev a:hover {
+    background: url(../img/btn_prev_next.gif) no-repeat left -30px;
+}
+
+.graduallyController .next a:hover {
+    background: url(../img/btn_prev_next.gif) no-repeat -30px -30px;
+}
+aside {
+    width: 302px;
+    margin-top: 30px;
+}
+
+aside h3 {
+    margin: 22px 0 0 17px;
+    color: #8d8c8c;
+    font-size: 18px;
+}
+
+aside form input {
+    background: url('../img/search.png') no-repeat scroll center right;
+    border: 1px solid #DDDDDD;
+    margin: 15px 0 7px 17px;
+    padding: 9px 5px;
+    width: 252px;
+    height: 15px;
+    color: #979797;
+    font: 12px/29px Helvetica,Verdana,Arial,sans-serif;
+
+}
+
+aside li a {
+    color: #9b9a9a;
+    font-size: 13px;
+}
+
+#tabs {
+
+}
+
+#content #tabs ul {
+    margin: 26px 0 28px 17px;
+}
+
+#tabs ul li {
+    display: inline;
+    list-style: none;
+}
+
+#tabs ul li a {
+    padding: 11px 10px
+}
+
+#tabs ul li a:hover {
+    background: #15398f;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+#tabs-1,#tabs-2,#tabs-3 {
+    display: none;
+}
+
+#content #tabs .vertical-menu {
+    margin: 0;
+    padding: 17px
+}
+.vinetas {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background-color: #15398F;
+}
+#content #tabs .vertical-menu {
+    margin: 0 0 39px 0px;
+}
+
+#content #tabs .vertical-menu li {
+    margin-bottom: 20px;
+    display: block;
+}
+
+#content #tabs .vertical-menu li a {
+    color: #929191;
+}
+#content #tabs .vertical-menu li a:hover {
+    background: none;
+    text-decoration: underline;
+}
+
+.ui-tabs {
+    position: relative;
+    padding: .2em;
+    zoom: 1;
+}
+
+/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav {
+    margin: 0;
+    padding: .2em .2em 0;
+}
+.ui-tabs .ui-tabs-nav li {
+    list-style: none;
+    float: left;
+    position: relative;
+    top: 1px;
+    margin: 0 .2em 1px 0;
+    border-bottom: 0 !important;
+    padding: 0;
+    white-space: nowrap;
+}
+.ui-tabs .ui-tabs-nav li a {
+    float: left;
+    padding: .5em 1em;
+    text-decoration: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+    margin-bottom: 0;
+    padding-bottom: 1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+    cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+    cursor: pointer;
+}
+
+/* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel {
+    display: block;
+    border-width: 0;
+    padding: 1em 1.4em;
+    background: none;
+}
+.ui-tabs .ui-tabs-hide {
+    display: none !important;
+}
+
+#advertise {
+    margin: 0 0 36px 17px;
+    width: 251px;
+    height: 114px;
+    background: #c0e694;
+    text-align: center;
+}
+
+#advertise h2 {
+    color: #FFFFFF;
+    font: 31px Times,serif;
+    padding-top: 33px;
+}
+
+#advertise p {
+    color: #FFFFFF;
+    font: 21px Times,serif;
+    width: 80px;
+    height: 28px;
+    background: #b7e285;
+    margin: 0 auto;
+}
+
+.contentleft {
+    width: 612px;
+    float: left;
+    border-bottom: 1px solid #E3E3E3;
+    margin: 36px 0 328px 0;
+}
+
+.contentleft span {
+    display: block;
+    width: 54px;
+    height: 56px;
+    background: #15398f;
+    text-align: center;
+    font: bold 30px/56px Arial, sans-serif;
+    ;
+    color: #FFFFFF;
+}
+
+.contentleft h2 {
+    font-size: 18px;
+    color: #1f1f1f;
+    margin-left: 83px;
+}
+
+.contentleft h4 {
+    color: #fff;
+    background: #15398f;
+    margin-left: 255px;
+    padding-left: 10px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+}
+
+.contentleft p {
+    margin-left: 270px;
+}
+
+.contentleft a {
+    display: block;
+    clear: both;
+    margin: 80px 0 12px 0;
+    width: 80px;
+    height: 28px;
+    background: #15398f;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 28px;
+}
+
+footer {
+    height: 61px;
+    margin: 28px auto 0 auto;
+    clear: both;
+    border-top: 1px solid #E3E3E3;
+}
+small {
+    margin: 28px 0 18px 19px;
+    color: #8c8b8b;
+    line-height: 60px;
+    font-size: 13px;
+}
