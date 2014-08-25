@@ -8,7 +8,7 @@ while ($row = $info->fetch()) {
         $menu[$row['id']] = ['id'=>$row['id']];
         $name[$row['id']] = ['name'=>$row['name']];
     } else {
-        $sub_menu[$row['id']][$row['parent_page']] = ['name'=>$row['name'],'id'=>$row['id']];
+        $sub_menu[$row['parent_page']][$row['id']] = ['name'=>$row['name'],'id'=>$row['id']];
     }
 }
 
@@ -126,12 +126,21 @@ if ($_POST) {
                             <div class="col-md-12">                                
                                 <h4 class="label label-info add-page">Añadir páginas</h4>  
                             </div>
-                            <?php foreach ($row=$info->fetch()) { ?>                                
+                            <?php foreach ($menu as $key => $value) { ?>                                
                                 <div class="col-md-6">
                                     <label>Título</label>
-                                    <input type="text" value="<?php echo $row['name'] ?>" name="page[<?php echo $row['id'] ?>]" class="form-control" placeholder="Título de página" data-id="<?php echo $row['id'] ?>">
+                                    <input type="text" value="<?php echo $name[$key]['name'] ?>" name="page[<?php echo $key ?>]" class="form-control" placeholder="Título de página" data-id="<?php echo $key ?>">
                                     <i class="fa fa-plus btn btn-info"></i>
                                     <i class="fa fa-minus btn btn-danger"></i>
+                                    <?php foreach ($sub_menu[$key] as $subkey => $subvalue) {
+                                        var_dump($subvalue);
+                                        if ($subkey) {  ?>
+                                            <div class="col-md-10">
+                                                <label for="">Título</label>
+                                                <input type="text" name="subpage[]" value="<?php echo $subvalue['name'] ?>" class="form-control">
+                                            </div>
+                                        <?php }    
+                                    } ?>
                                 </div>                        
                             <?php } ?>                      
                             <div class="template-page"></div>
