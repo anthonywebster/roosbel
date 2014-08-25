@@ -57,20 +57,10 @@ require_once "function.php";
                     </div>
 
                     <div class="redactor">
-                        <form action="" method="post" class="normal">                            
-                            <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" name="title" class="form-control" placeholder="Enter title" >
-                            </div>
-
+                        <form action="" method="post" class="normal">                           
                             <div class="form-group">
                                 <label>Título</label>
                                 <input type="text" name="title" class="form-control" placeholder="Ingrese el título" >
-                            </div>
-
-                            <div class="form-group">
-                                <label>Intro</label>
-                                <textarea class="form-control" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -79,15 +69,8 @@ require_once "function.php";
                             </div>
 
                             <div class="form-group">
-                                <label>Content</label>
-                                <div class="summernote"></div>
-                                <textarea class="form-control hide" name="content_eng" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Contenido</label>
-                                <div class="summernote"></div>
-                                <textarea class="form-control hide" name="content_es" rows="3"></textarea>
+                                <textarea class="form-control hide summernote" name="content_es" rows="3"></textarea>
                             </div>
                             <input type="submit" class="btn btn-success">
                         </form>
@@ -98,4 +81,5 @@ require_once "function.php";
 
         </div> <!-- Fin del container -->
     </body>
+    <script src="js/function.js"></script>
 </html>
