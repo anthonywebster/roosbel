@@ -1,5 +1,6 @@
 <?php 
 require "function.php";
+$index = true;
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -44,18 +45,7 @@ require "function.php";
         <!-- Add your site or application content here -->
         <div id="container">
         <div id="content">
-            <header>
-                <nav id="pagemenu">
-                    <ul>
-                    <li class="first"><a href="">HOME</a></li>
-                    <li><a href="">ABOUT US</a></li>
-                    <li><a href="">ARCHIVES</a></li>
-                    <li><a href="">CONTACT US</a></li>
-                    </ul>
-                </nav>
-                
-                <h1></h1>
-            </header>
+            <?php require "include.header.php"; ?>
 
             <div id="slider" class="">
                 <ul class="clearfix bxslider">
@@ -68,25 +58,7 @@ require "function.php";
             </div>
             
             <aside class="right">
-                <h3>Search</h3>
-                <form action="" method="post">
-                <p><input type="search" name="search" id="search" placeholder="Search..."/></p>
-                </form> 
-                
-                <h3>Programa de ingles comunicativo</h3>
-                <div id="tabs">
-                    <div id="fragment-1">
-                        <ul class="vertical-menu">
-                        <li><span class="vinetas"></span><a href="">About us</a></li>
-                        <li><span class="vinetas"></span><a href="">Categories</a></li>
-                        <li><span class="vinetas"></span><a href="">Demo Pages</a></li>
-                        <li><span class="vinetas"></span><a href="">Documentation</a></li>
-                        <li><span class="vinetas"></span><a href="">Elements</a></li>
-                        <li><span class="vinetas"></span><a href="">Feeds</a></li>
-                        <li><span class="vinetas"></span><a href="">Popular Post</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <?php include "include.right.php" ?>
             </aside>
             
             <div class="contentleft">
@@ -97,12 +69,8 @@ require "function.php";
                 <p><strong>Suspendisse commodo nisl vitae tortor egestas id ornare quam ullamcorper</strong>. Aliquam laoreet orci iaculis magna consectetur imperdiet. Fusce luctus lectus sed mi hendrerit vel tincidunt nulla interdum. Suspendisse molestie augue eget nisi molestie venenatis. Cras vitae condimentum nisl. Etiam odio lorem, aliquam eu suscipit a, posuere convallis sapien. Aliquam a[...]</p>
                 <a href="">Read more &raquo;</a>
             </div>
-            <footer>
-                <small>&copy; Company Name. All Rights Reserved</small>
-            </footer>
+            <?php include "include.footer.php" ?>
         </div>  
     </div>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
     </body>
 </html>

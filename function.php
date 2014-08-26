@@ -68,5 +68,22 @@ $head_cms = '
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
 <script src="js/vendor/summernote.min.js"></script>
-'
+';
+
+$menu_principal = $db->query("SELECT SQL_CACHE name,id,parent_page,link FROM pages WHERE status = 1 ORDER BY id");
+
+while ($row = $menu_principal->fetch()) {
+    if ($row['parent_page']==null) {
+        $menu[$row['id']] = ['id'=>$row['id'],'link' => $row['link'],"name" => $row['name']];
+    } else {
+        $sub_menu[$row['parent_page']][$row['id']] = ['name'=>$row['name'],'id'=>$row['id'],"link" => $row['link']];
+    }
+}
+
+function delete($id) {
+    global $db;
+    $db->query("UPDATE pages SET status = 0 WHERE id = $id");
+    return die('true');
+}
+
 ?>

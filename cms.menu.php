@@ -1,18 +1,11 @@
 <?php 
 require_once "function.php"; 
+$page_menu = true;
 
-$info = $db->query("SELECT name,id,parent_page FROM pages ORDER BY id");
-
-while ($row = $info->fetch()) {
-    if ($row['parent_page']==null) {
-        $menu[$row['id']] = ['id'=>$row['id']];
-        $name[$row['id']] = ['name'=>$row['name']];
-    } else {
-        $sub_menu[$row['parent_page']][$row['id']] = ['name'=>$row['name'],'id'=>$row['id']];
-    }
+if ($_GET['delete']) {
+    $id = (int)$_GET['delete'];
+    delete($id);
 }
-
-var_dump($sub_menu);
 
 if ($_POST) {
     $title = $_POST['page'];
@@ -20,21 +13,24 @@ if ($_POST) {
         Este foreach recorre cada pagina que se encuentra en el formulario
     */
     foreach ($title as $key => $value) {
-        $flatten = flatten($value);
         /*
             Con esto condicion evaluo si el input se creo dinamicamente
         */
         if ($key == 'new') {
-            $post = [
-                'name'   => html($value),
-                'inmenu' => 1,
-            ];
+            foreach ($value as $subkey => $subvalue) {
+                $flatten = flatten($subvalue);
+                $post = [
+                    'name'   => html($subvalue),
+                    'inmenu' => 1,
+                ];
 
-            $db->insert('pages',$post);
-            $id = $db->insert_id;
-            $link = html($id."-".$flatten);
-            $db->query("UPDATE pages SET link = $link WHERE id = $id");
+                $db->insert('pages',$post);
+                $id = $db->insert_id;
+                $link = html($id."-".$flatten);
+                $db->query("UPDATE pages SET link = $link WHERE id = $id");
+            }
         } else {
+            $flatten = flatten($value);
             $link = $key."-".$flatten;
             $post = [
                 'name'   => html($value),
@@ -43,30 +39,42 @@ if ($_POST) {
             ];
 
             $db->update('pages',$post,"id=$key");
-            if ($_POST['subpage'][$key]) {
-                foreach ($_POST['subpage'] as $subkey => $subvalue) {
-                    //Esta condicion es para que solo entre una vez por cada sub-pagina
-                    //ya que esta dentro de otro foreac
-                    if ($subkey==$key) {
-                        $flatten = flatten($value);
-                        $post = [
-                            'name'   => html($subvalue),
-                            'inmenu' => 1,
-                        ];
+        }
+    } // fin del foreach de page
 
-                        $db->insert('pages',$post);
-                        $id_sub = $db->insert_id;
-                        $link = html($id_sub."-".$flatten);
-                        $db->query("UPDATE pages SET parent_page = $subkey,link = $link WHERE id = $id_sub");
-                    }
-                }
-            }
+    if (isset($_POST['subpage']['new'])) {
+        foreach ($_POST['subpage']['new'] as $key => $value) {
+
+            $flatten = flatten($value);
+            $post = [
+                'name'   => html($value),
+                'inmenu' => 1,
+            ];
+
+            $db->insert('pages',$post);
+            $id_sub = $db->insert_id;
+            $link = html($id_sub."-".$flatten);
+            $db->query("UPDATE pages SET parent_page = $key,link = $link WHERE id = $id_sub");
+
+        }
+    } elseif(!isset($_POST['subpage']['new']) && isset($_POST['subpage'])) {
+        foreach ($_POST['subpage'] as $key => $value) {
+
+            $flatten = flatten($value);
+            $link = html($key."-".$flatten);
+            $post = [
+                'name'   => html($value),
+                'inmenu' => 1,
+                'link'   => $link
+            ];
+
+            $db->update('pages',$post,"id=$key");
 
         }
     }
 
-    //header("Location:cms.pages.php");
-    //exit();
+    header("Location:cms.pages.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -120,29 +128,28 @@ if ($_POST) {
                             </div>
                         </div>
                     </div>
-
                     <div class="redactor">
                         <form action="" method="post" class="normal row page">   
                             <div class="col-md-12">                                
                                 <h4 class="label label-info add-page">Añadir páginas</h4>  
                             </div>
-                            <?php foreach ($menu as $key => $value) { ?>                                
+                            <?php if($menu) { foreach ($menu as $key => $value) { ?>                                
                                 <div class="col-md-6">
                                     <label>Título</label>
-                                    <input type="text" value="<?php echo $name[$key]['name'] ?>" name="page[<?php echo $key ?>]" class="form-control" placeholder="Título de página" data-id="<?php echo $key ?>">
+                                    <input type="text" value="<?php echo $value['name'] ?>" name="page[<?php echo $key ?>]" class="form-control" placeholder="Título de página" data-id="<?php echo $key ?>">
                                     <i class="fa fa-plus btn btn-info"></i>
-                                    <i class="fa fa-minus btn btn-danger"></i>
-                                    <?php foreach ($sub_menu[$key] as $subkey => $subvalue) {
-                                        var_dump($subvalue);
+                                    <i class="fa fa-minus btn btn-danger" data-id="<?php echo $key ?>"></i>
+                                    <?php if($sub_menu[$key]) { foreach ($sub_menu[$key] as $subkey => $subvalue) {
                                         if ($subkey) {  ?>
                                             <div class="col-md-10">
                                                 <label for="">Título</label>
-                                                <input type="text" name="subpage[]" value="<?php echo $subvalue['name'] ?>" class="form-control">
+                                                <input type="text" name="subpage[<?php echo $subvalue['id'] ?>]" value="<?php echo $subvalue['name'] ?>" class="form-control">
+                                                <i class="fa fa-minus btn btn-danger" data-id="<?php echo $subvalue['id'] ?>"></i>
                                             </div>
                                         <?php }    
-                                    } ?>
+                                    } }?>
                                 </div>                        
-                            <?php } ?>                      
+                            <?php } } ?>                      
                             <div class="template-page"></div>
                             <div class="col-md-12">                                
                                 <input type="submit" class="btn btn-success" value="Guardar">

@@ -213,6 +213,7 @@ AddDefaultCharset utf-8
     Options +FollowSymlinks
   # Options +SymLinksIfOwnerMatch
     RewriteEngine On
+    RewriteRule ^([0-9]+)-(.+)/?$ content.php?id=$1
   # RewriteBase /
 </IfModule>
 

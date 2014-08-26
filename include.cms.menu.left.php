@@ -4,7 +4,7 @@
    </div>
     <div>
         <ul>
-            <li><a href="cms.pages.php"><i class="fa fa-dashboard fa-fw fa-2x"></i>Dashboard</a></li>
+            <li class="<?php $page_menu == true ? 'active' : '' ?>"><a href="cms.menu.php"><i class="fa fa-dashboard fa-fw fa-2x"></i>Menú</a></li>
             <li><a href="cms.gallery.php#list"><i class="fa fa-photo fa-fw fa-2x"></i>Gallery</a></li>
             <li><a href="cms.teachers.php#list"><i class="fa fa-photo fa-fw fa-2x"></i>Teachers</a></li>
             
