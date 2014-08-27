@@ -70,7 +70,7 @@ $head_cms = '
 <script src="js/vendor/summernote.min.js"></script>
 ';
 
-$menu_principal = $db->query("SELECT SQL_CACHE name,id,parent_page,link FROM pages WHERE status = 1 ORDER BY id");
+$menu_principal = $db->query("SELECT SQL_CACHE name,id,parent_page,link FROM pages WHERE status = 1 AND inmenu = 1 ORDER BY id");
 
 while ($row = $menu_principal->fetch()) {
     if ($row['parent_page']==null) {

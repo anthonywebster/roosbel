@@ -139,12 +139,14 @@ if ($_POST) {
                                     <input type="text" value="<?php echo $value['name'] ?>" name="page[<?php echo $key ?>]" class="form-control" placeholder="Título de página" data-id="<?php echo $key ?>">
                                     <i class="fa fa-plus btn btn-info"></i>
                                     <i class="fa fa-minus btn btn-danger" data-id="<?php echo $key ?>"></i>
+                                    <i class="fa fa-pencil btn btn-success" data-url="cms.page.php?id=<?php echo $key ?>&menu=1"></i>
                                     <?php if($sub_menu[$key]) { foreach ($sub_menu[$key] as $subkey => $subvalue) {
                                         if ($subkey) {  ?>
                                             <div class="col-md-10">
                                                 <label for="">Título</label>
                                                 <input type="text" name="subpage[<?php echo $subvalue['id'] ?>]" value="<?php echo $subvalue['name'] ?>" class="form-control">
                                                 <i class="fa fa-minus btn btn-danger" data-id="<?php echo $subvalue['id'] ?>"></i>
+                                                <i class="fa fa-pencil btn btn-success" data-url="cms.page.php?id=<?php echo $subvalue['id'] ?>&menu=1"></i>
                                             </div>
                                         <?php }    
                                     } }?>
@@ -163,4 +165,10 @@ if ($_POST) {
         </div> <!-- Fin del container -->
     </body>
     <script src="js/function.js"></script>
+    <script>
+    $('.fa-pencil').on('click',function(){
+        var url = $(this).data('url');
+        window.location.href = url;
+    });
+    </script>
 </html>

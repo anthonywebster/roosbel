@@ -1,6 +1,11 @@
 <?php 
 require "function.php";
 $id = (int)$_GET['id'];
+
+if ($id) {
+    $info = $db->query("SELECT content,link,id,name FROM pages WHERE id = $id AND status = 1 LIMIT 1");
+}
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -31,6 +36,7 @@ $id = (int)$_GET['id'];
             </aside>
             
             <div class="contentleft">
+                <?php echo $info->content ?>
             </div>
             <?php include "include.footer.php" ?>
         </div>  
