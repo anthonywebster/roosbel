@@ -2,6 +2,28 @@
 require_once "function.php"; 
 $slide = true;
 $id = $_GET['id'];
+$pics = $db->query("SELECT * FROM slide WHERE status = 1");
+
+if ($_POST['update']) {
+
+    $id  = $_POST['id_img'];
+    $url = html($_POST['link']);
+    $post = ['link' => $url];
+    $db->update('slide',$post,"id=$id");
+    if (!empty($_FILES['img']['tmp_name'])) {
+        $pic = new SimpleImage();
+        $pic->load($_FILES['img']['tmp_name']);
+
+        $pic->resizeTowidth(980);
+        $pic->save("media/slide/".$id.".jpg");
+
+        $pic->resizeTowidth(200);
+        $pic->save("media/slide/".$id.".th".".jpg");
+    }
+    header("location:cms.slide.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -17,7 +39,17 @@ $id = $_GET['id'];
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <?php echo $head.$head_cms; ?>
         <style>
-            
+            ul{
+                list-style:none;
+            }
+            .content-img li{
+                width: 223px;
+                height: 210px;
+                margin: 11px;
+            }
+            .content-img li img{padding-bottom:3px;}
+            .content-img li input[type="file"]{width: 100%;margin:5px 0px 7px 0px;}
+            .content-img .img-limit{margin-bottom:5px;}
         </style>
     </head>
     <body class="">
@@ -59,28 +91,29 @@ $id = $_GET['id'];
                     </div>
 
                     <div class="redactor">
-                        <form action="" method="post" class="normal upload">                           
-                            <div class="form-group">
-                                <label>Título</label>
-                                <input type="text" id="title" name="title" class="form-control" placeholder="Ingrese el título" >
-                            </div>
-
                             <div class="form-group">
                                 <ul class="clearfix content-img">
                                     <?php if ($pics->num_rows) { ?>
-                                         <?php while ($row = $pics->fetch()) { $imgurl = "media/gallery/$id.th.{$row['position']}.jpg" ; ?>
+                                         <?php while ($row = $pics->fetch()) { $imgurl = "media/slide/{$row['id']}.th.jpg" ; ?>
                                             <?php if (file_exists($imgurl)) { ?>
                                                 <li>
-                                                    <a href="cms.slide.php?pos=<?php echo $row['position'] ?>&idimg=<?php echo $row['id'] ?>&id=<?php echo $id ?>"><span class="x">X</span></a>
-                                                    <div class="img-limit">
-                                                        <img src="<?php echo $imgurl ?>" alt="">
-                                                    </div>
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        <a href="cms.slide.php?idimg=<?php echo $row['id'] ?>"><span class="x">X</span></a>
+                                                        <div class="img-limit">
+                                                            <img src="<?php echo $imgurl ?>" alt="">
+                                                        </div>
+                                                        <input type="text" class="form-control" name="link" placeholder="url" value="<?php echo $row['link'] ?>">
+                                                        <input type="file" name="img">
+                                                        <input type="hidden" name="id_img" value="<?php echo $row['id'] ?>">
+                                                        <input type="submit" value="Update" class="btn btn-success" name="update">
+                                                    </form>
                                                 </li>
                                            <?php } ?>
                                          <?php } ?>
                                     <?php } ?>
                                 </ul>
                             </div>
+                        <form action="" method="post" class="normal upload">               
 
                             <input type="file" name="images[]" id="img" class="input-file" multiple />
 
@@ -104,13 +137,13 @@ $id = $_GET['id'];
     <script src="js/function.js"></script>
     <script>
         
-        $('input[type="file"]').on('change',saveFiles);
+        $('input[name="images[]"]').on('change',saveFiles);
 
         $('.upload').on('submit',function(){
-            /*
-            Este objeto contine los datos que se va a enviar en el post
-            input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
-            */
+            
+            // Este objeto contine los datos que se va a enviar en el post
+            // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
+            
             var object = {
                 //inputs :['title'],
                 config:{

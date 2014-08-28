@@ -63,34 +63,31 @@ if ($_POST['gallery']) {
         }
     }
     die(json_encode($id));
-}
-
 } elseif ($_POST['slide']) {
 
-        if ($_FILES) {
+        if (!empty($_FILES['img']['tmp_name'])) {
 
-            foreach ($_FILES as $key => $value) {
-                $post = ['status'=>1];
-                $postpic = array(
-                    'galleries' => $id,
-                    'position' => $position,
+            foreach ($_FILES['img']['tmp_name'] as $key => $value) {
+
+                $post = array(
+                    'status' => 1
                 );
 
-                $tmp= $value['tmp_name'];
-
-                $db->insert('galpics',$postpic);
+                $db->insert('slide',$post);
+                $id = $db->insert_id;
                 $pic = new SimpleImage();
-                $pic->load($value['tmp_name']);
+                $pic->load($value);
 
-                $pic->resizeTowidth(650);
-                $pic->save("media/gallery/slide".$id.".".$position.".jpg");
+                $pic->resizeTowidth(980);
+                $pic->save("media/slide/".$id.".jpg");
 
                 $pic->resizeTowidth(200);
-                $pic->save("media/gallery/".$id.".th.".$position.".jpg");
+                $pic->save("media/slide/".$id.".th".".jpg");
 
 
             }
         }
-    die(json_encode($id));
+    $status =['status'=>true];
+    die(json_encode($status));
 }
 ?>

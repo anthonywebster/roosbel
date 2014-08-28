@@ -113,9 +113,12 @@ var uploadFiles = function (object) {
         data.append('img[]',value);
     })
 
-    object.inputs.forEach(function(value,index){
-        data.append(index,$('#'+value).val());
-    })
+    if (object.hasOwnProperty('inputs')) {
+
+        object.inputs.forEach(function(value,index){
+            data.append(index,$('#'+value).val());
+        })
+    };
 
     for (prop in object.config) {
         if (object.config.hasOwnProperty(prop)) {
@@ -151,7 +154,8 @@ var uploadFiles = function (object) {
             return myXhr
         },
         success: function (data,status,test) {
-            if (data) {
+            if (data.status==true) {
+                location.reload();
                 //location.href = "cms.slide.php?id="+data+"&sms=1#last";
             }
         }
