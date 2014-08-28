@@ -102,7 +102,7 @@ if ($_POST['update']) {
                                                         <div class="img-limit">
                                                             <img src="<?php echo $imgurl ?>" alt="">
                                                         </div>
-                                                        <input type="text" class="form-control" name="link" placeholder="url" value="<?php echo $row['link'] ?>">
+                                                        <input type="text" class="form-control auto" name="link" placeholder="url" value="<?php echo $row['link'] ?>">
                                                         <input type="file" name="img">
                                                         <input type="hidden" name="id_img" value="<?php echo $row['id'] ?>">
                                                         <input type="submit" value="Update" class="btn btn-success" name="update">

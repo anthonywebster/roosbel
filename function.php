@@ -53,9 +53,13 @@ $head = '
 <link rel="stylesheet" href="css/jquery.bxslider.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="js/vendor/modernizr-2.6.2.min.js"></script>
- <script src="js/vendor/jquery-1.10.2.min.js"></script>
- <script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/jquery-1.10.2.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/vendor/jquery.bxslider.js"></script>
+<script src="js/vendor/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery-ui.theme.css">
+<link rel="stylesheet" href="css/jquery-ui.structure.css">
 ';
 
 $head_cms = '

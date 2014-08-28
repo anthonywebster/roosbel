@@ -163,17 +163,6 @@ var uploadFiles = function (object) {
 };
 
 
-$('body').on('click','.remove',function(){
-    var position = $(this).parent().index();
-    if (confirm('Desea eliminar esta imagen')) {
-        $(this).parent().slideDown(500,function(){
-            DeleteToArray(position);
-            $(this).remove();
-        })
-    } else{
-        return false;
-    }
-})
 
 function deletePage() {
     self = $(this);
@@ -191,6 +180,41 @@ function deletePage() {
         }
     });
 }
+
+/*
+Esto es para el auto complete de las url
+*/
+$('.auto').each(function(){
+    self = $(this);
+
+    return self.autocomplete({
+        minLength:2,
+        source:function(request,response) {
+            console.log(request);
+            term = request.term;
+            return $.ajax({
+                url: 'autocomplete.php',
+                type: 'post',
+                data: {term:term},
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    })
+});
+
+$('body').on('click','.remove',function(){
+    var position = $(this).parent().index();
+    if (confirm('Desea eliminar esta imagen')) {
+        $(this).parent().slideDown(500,function(){
+            DeleteToArray(position);
+            $(this).remove();
+        })
+    } else{
+        return false;
+    }
+})
 
 $('.add-page').on('click',Template.templatePage);
 $('.redactor').on('click','.fa-plus',Template.templateSub);
