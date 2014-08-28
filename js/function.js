@@ -190,14 +190,14 @@ $('.auto').each(function(){
     return self.autocomplete({
         minLength:2,
         source:function(request,response) {
-            console.log(request);
             term = request.term;
             return $.ajax({
                 url: 'autocomplete.php',
                 type: 'post',
+                dataType:'json',
                 data: {term:term},
                 success: function (data) {
-                    console.log(data);
+                    response(data);
                 }
             });
         }
