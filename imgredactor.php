@@ -1,5 +1,6 @@
 <?php
-$dir = 'media/redactor/';
+require "function.php";
+$dir = 'media/redactor';
  
 $_FILES['file']['type'] = strtolower($_FILES['file']['type']);
  
@@ -15,7 +16,6 @@ if ($_FILES['file']['type'] == 'image/png'
 
     // copying
     if (is_writable($dir)) {
-        setOrientationImage($_FILES['file']['tmp_name']);
         move_uploaded_file($_FILES['file']['tmp_name'], $dir."/".$filename);
         $img = true;
     } else {
@@ -24,7 +24,7 @@ if ($_FILES['file']['type'] == 'image/png'
 
     // displaying file    
     $array = array(
-        'filelink' => 'media/redactor'.$filename,
+        'filelink' => 'media/redactor/'.$filename,
         'upload' => $img,
     );
     
