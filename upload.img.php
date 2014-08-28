@@ -66,51 +66,31 @@ if ($_POST['gallery']) {
 }
 
 } elseif ($_POST['slide']) {
-    $post = ['status'=>1];
 
-}
+        if ($_FILES) {
 
-if ($_POST) {
-       $postGallery = array(
-        'status' => (int)1,
-        'title' => $title,
-        'title_es' => $title_es,
-        'description' => $desc,
-        'description_es' => $desc_es,
-        'status' => (int)$_POST["status"],
-    );
-    if ( $infoGallery_count > 0) {
-        $db->update('galleries',$postGallery,"id=$infoGallery->id");
-        $id = $id;
-    } else {
-        $db->insert('galleries',$postGallery);
-        $id = $db->insert_id;
-    }
-    if ($_FILES) {
+            foreach ($_FILES as $key => $value) {
+                $post = ['status'=>1];
+                $postpic = array(
+                    'galleries' => $id,
+                    'position' => $position,
+                );
 
-        foreach ($_FILES as $key => $value) {
-            $key++;
-            $position = $key + $position_image; 
-            $postpic = array(
-                'galleries' => $id,
-                'position' => $position,
-            );
+                $tmp= $value['tmp_name'];
 
-            $tmp= $value['tmp_name'];
+                $db->insert('galpics',$postpic);
+                $pic = new SimpleImage();
+                $pic->load($value['tmp_name']);
 
-            $db->insert('galpics',$postpic);
-            $pic = new SimpleImage();
-            $pic->load($value['tmp_name']);
+                $pic->resizeTowidth(650);
+                $pic->save("media/gallery/slide".$id.".".$position.".jpg");
 
-            $pic->resizeTowidth(650);
-            $pic->save("media/gallery/".$id.".".$position.".jpg");
-
-            $pic->resizeTowidth(200);
-            $pic->save("media/gallery/".$id.".th.".$position.".jpg");
+                $pic->resizeTowidth(200);
+                $pic->save("media/gallery/".$id.".th.".$position.".jpg");
 
 
+            }
         }
-    }
     die(json_encode($id));
 }
 ?>

@@ -112,8 +112,7 @@ $id = $_GET['id'];
             input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
             */
             var object = {
-                inputs :['title'],
-                test:5,
+                //inputs :['title'],
                 config:{
                     slide:true,
                 }
