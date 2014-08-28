@@ -73,6 +73,104 @@ var Template = (function() {
 
 Template = new Template();
 
+var saveFiles = function (event) {
+    var files_thumb = event.target.files;
+    var containerthumb = $('#containerthumb');
+
+    $.each(files_thumb,function(index,value){
+        // Aqui almaceno en el arreglo files las imagenes seleccionadas
+        files.push(value);
+        // Con este vericamos si es una imagen la que viene
+        if (!value.type.match('image.*')) {
+            Continue;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = (function(theFile){
+            return function(evt) {
+                containerthumb.append(
+                "<li class='thumb'><span class='remove x'>x</span>"+
+                    "<img src='" + evt.target.result + "' class='test' /> " +                       
+                    "<div class='description'><input type='text' name='description[]'/></div>" +
+                "</li>");
+            }
+        })(value);
+        reader.readAsDataURL(value);
+    }); // fin del foreach
+}
+
+var DeleteToArray = function (position) {
+    files.splice(position,1);
+}
+
+var uploadFiles = function (object) {
+    event.preventDefault();
+
+    var data = new FormData();
+
+    files.forEach(function(value,index){
+        data.append('img[]',value);
+    })
+
+    object.inputs.forEach(function(value,index){
+        data.append(index,$('#'+value).val());
+    })
+
+    for (prop in object.config) {
+        if (object.config.hasOwnProperty(prop)) {
+            data.append(prop,object.config[prop]);
+        }
+    }        
+
+    $.ajax({
+        url: 'upload.img.php',
+        type: 'post',
+        data: data,
+        dataType:'json',
+        contentType: false,
+        processData: false,
+        xhr: function () {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                myXhr.upload.addEventListener('progress',function(event){
+                    var porcentaje = 0;
+                    var posicion = event.loaded || event.position;
+                    var total = event.total;
+
+                    if (event.lengthComputable) {
+                        porcentaje = Math.ceil(posicion/total * 100) + '%';
+                        $('.barra').width(porcentaje);
+                        $('.porcentaje').html(porcentaje);
+                        if (porcentaje=="100%") {
+                            //console.log("bien");
+                        }
+                    }
+                },false);
+            }
+            return myXhr
+        },
+        success: function (data,status,test) {
+            if (data) {
+                //location.href = "cms.slide.php?id="+data+"&sms=1#last";
+            }
+        }
+    });
+};
+
+
+$('body').on('click','.remove',function(){
+    var position = $(this).parent().index();
+    if (confirm('Desea eliminar esta imagen')) {
+        $(this).parent().slideDown(500,function(){
+            DeleteToArray(position);
+            $(this).remove();
+        })
+    } else{
+        return false;
+    }
+})
+
 function deletePage() {
     self = $(this);
     var $id = self.data('id');
