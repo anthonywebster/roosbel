@@ -17,12 +17,10 @@ require.config({
 });
 
 require(['jquery','bxslider'],function($,bxslider){
-
-   $(function(){
-	   	$('.bxslider').bxSlider({
-	      mode: 'fade',
-	      captions: true
-	    });
+	$(function(){
+         $('.bxslider').bxSlider({
+          mode: 'fade',
+          captions: true
+        });
    })
-
-});
+})
