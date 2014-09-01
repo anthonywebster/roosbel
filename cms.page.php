@@ -102,7 +102,7 @@ if ($_POST) {
 
                             <div class="form-group">
                                 <label>Contenido</label>
-                                <textarea class="form-control hide summernote" name="content" rows="3"><?php echo $info->content ? $info->content : ''; ?></textarea>
+                                <textarea class="form-control summernote" name="content" rows="3"><?php echo $info->content ? $info->content : ''; ?></textarea>
                             </div>
                             <input type="submit" class="btn btn-success" value="Guardar">
                         </form>
@@ -113,5 +113,4 @@ if ($_POST) {
 
         </div> <!-- Fin del container -->
     </body>
-    <script src="js/function.js"></script>
 </html>

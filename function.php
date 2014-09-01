@@ -56,9 +56,6 @@ $head = '
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/jquery-ui.theme.css">
 <link rel="stylesheet" href="css/jquery-ui.structure.css">
-<script src="js/vendor/jquery.js"></script>
-<script src="js/vendor/bxslider.js"></script>
-
 ';
 
 $head_cms = '
@@ -70,7 +67,6 @@ $head_cms = '
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
-<script src="js/vendor/summernote.js"></script>
 <script src="js/vendor/require.js" data-main="js/main.js"></script>
 ';
 

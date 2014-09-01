@@ -15,6 +15,8 @@ $index = true;
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <?php echo $head ?>
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/vendor/bxslider.js"></script>
         <script>
            $(function(){
                  $('.bxslider').bxSlider({
