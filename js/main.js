@@ -12,15 +12,12 @@ require.config({
 		'bootstrap':{
 			deps:['jquery'],
 			exports:'bootstrap'
+		},
+		summernote:{
+			deps:['jquery'],
+			exports:'summernote'
 		}
 	}
 });
 
-require(['jquery','bxslider'],function($,bxslider){
-	$(function(){
-         $('.bxslider').bxSlider({
-          mode: 'fade',
-          captions: true
-        });
-   })
-})
+require(['../app']);

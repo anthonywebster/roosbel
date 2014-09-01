@@ -16,12 +16,12 @@ $index = true;
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <?php echo $head ?>
         <script>
-        //    $(function(){
-        //          $('.bxslider').bxSlider({
-        //           mode: 'fade',
-        //           captions: true
-        //         });
-        //    })
+           $(function(){
+                 $('.bxslider').bxSlider({
+                  mode: 'fade',
+                  captions: true
+                });
+           })
         </script>
         <style>
             .bxslider li{left: 0;}

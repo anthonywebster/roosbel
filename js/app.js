@@ -1,8 +1,4 @@
-require(['jquery','bxslider'],function($,bxslider){
+require(['jquery','jqueryui'],function($,ju){
 
-    $('.bxslider').bxSlider({
-      mode: 'fade',
-      captions: true
-    });
-
+	
 });
