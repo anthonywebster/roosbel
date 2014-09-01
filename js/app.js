@@ -1,4 +1,4 @@
-require(['jquery','jqueryui','summernote'],function($,ju,summernote){
+require(['jquery','jqueryui','summernote','xml','formatting','codemirror','bootstrap'],function($,ju,summernote){
 
 	var files=[];
   
@@ -222,10 +222,11 @@ $('.add-page').on('click',Template.templatePage);
 $('.redactor').on('click','.fa-plus',Template.templateSub);
 $('.redactor').on('click',".dinamic",Template.deletePage);
 $('.btn-danger:not(.dinamic)').on('click',deletePage);
+
 $('.fa-pencil').on('click',function(){
-        var url = $(this).data('url');
-        window.location.href = url;
-    });
+    var url = $(this).data('url');
+    window.location.href = url;
+});
 
 $('input[name="images[]"]').on('change',saveFiles);
 

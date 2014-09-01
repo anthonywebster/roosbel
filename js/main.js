@@ -10,14 +10,22 @@ require.config({
 			exports:'jqueryui'
 		},
 		'bootstrap':{
-			deps:['jquery'],
+			deps:['jquery','jqueryui'],
 			exports:'bootstrap'
 		},
-		codemirror:{
+		'codemirror':{
 			deps:['jquery'],
 			exports:'codemirror'
 		},
-		summernote:{
+		'xml':{
+			deps:['jquery','codemirror'],
+			exports:'xml'
+		},
+		'formatting':{
+			deps:['jquery','xml'],
+			exports:'formatting'
+		},
+		'summernote':{
 			deps:['jquery','codemirror'],
 			exports:'summernote'
 		}
