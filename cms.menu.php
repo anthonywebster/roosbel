@@ -164,11 +164,4 @@ if ($_POST) {
 
         </div> <!-- Fin del container -->
     </body>
-    <script src="js/function.js"></script>
-    <script>
-    $('.fa-pencil').on('click',function(){
-        var url = $(this).data('url');
-        window.location.href = url;
-    });
-    </script>
 </html>

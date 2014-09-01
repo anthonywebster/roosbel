@@ -222,4 +222,25 @@ $('.add-page').on('click',Template.templatePage);
 $('.redactor').on('click','.fa-plus',Template.templateSub);
 $('.redactor').on('click',".dinamic",Template.deletePage);
 $('.btn-danger:not(.dinamic)').on('click',deletePage);
+$('.fa-pencil').on('click',function(){
+        var url = $(this).data('url');
+        window.location.href = url;
+    });
+
+$('input[name="images[]"]').on('change',saveFiles);
+
+        $('.upload').on('submit',function(){
+            
+            // Este objeto contine los datos que se va a enviar en el post
+            // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
+            
+            var object = {
+                //inputs :['title'],
+                config:{
+                    slide:true,
+                }
+            }
+            uploadFiles(object);
+        }); 
+
 });

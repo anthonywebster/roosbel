@@ -13,8 +13,12 @@ require.config({
 			deps:['jquery'],
 			exports:'bootstrap'
 		},
-		summernote:{
+		codemirror:{
 			deps:['jquery'],
+			exports:'codemirror'
+		},
+		summernote:{
+			deps:['jquery','codemirror'],
 			exports:'summernote'
 		}
 	}

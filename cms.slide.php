@@ -134,23 +134,4 @@ if ($_POST['update']) {
 
         </div> <!-- Fin del container -->
     </body>
-    <script src="js/function.js"></script>
-    <script>
-        
-        $('input[name="images[]"]').on('change',saveFiles);
-
-        $('.upload').on('submit',function(){
-            
-            // Este objeto contine los datos que se va a enviar en el post
-            // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
-            
-            var object = {
-                //inputs :['title'],
-                config:{
-                    slide:true,
-                }
-            }
-            uploadFiles(object);
-        }); 
-    </script>
 </html>
