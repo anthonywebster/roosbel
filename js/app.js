@@ -1,6 +1,25 @@
 require(['jquery','jqueryui','summernote','xml','formatting','codemirror','bootstrap'],function($,ju,summernote){
 
-	var files=[];
+$(function(){
+if ($('.summernote').length > 0) {
+
+    $('.summernote').summernote({
+      focus: true,
+      codemirror: { // codemirror options
+        theme: 'monokai'
+      },
+      onImageUpload:function(files,editor,welEditable){
+        sendFile(files[0],editor,welEditable);
+      },
+
+      onkeyup:function(e){
+        
+      }    
+    });
+};
+});
+
+var files=[];
   
 function sendFile(file,editor,welEditable) {
     data = new FormData();
@@ -18,22 +37,6 @@ function sendFile(file,editor,welEditable) {
   });
 }          
 
-if ($('.summernote').length > 0) {
-
-    $('.summernote').summernote({
-      focus: true,
-      codemirror: { // codemirror options
-        theme: 'monokai'
-      },
-      onImageUpload:function(files,editor,welEditable){
-        sendFile(files[0],editor,welEditable);
-      },
-
-      onkeyup:function(e){
-        
-      }    
-    });
-};
 
 var Template = (function() {
     'use strict';
@@ -230,18 +233,17 @@ $('.fa-pencil').on('click',function(){
 
 $('input[name="images[]"]').on('change',saveFiles);
 
-        $('.upload').on('submit',function(){
-            
-            // Este objeto contine los datos que se va a enviar en el post
-            // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
-            
-            var object = {
-                //inputs :['title'],
-                config:{
-                    slide:true,
-                }
+    $('.upload').on('submit',function(){        
+        // Este objeto contine los datos que se va a enviar en el post
+        // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
+        
+        var object = {
+            //inputs :['title'],
+            config:{
+                slide:true,
             }
-            uploadFiles(object);
-        }); 
+        }
+        uploadFiles(object);
+    }); 
 
 });
