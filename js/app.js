@@ -1,4 +1,4 @@
-require(['jquery','jqueryui','summernote','xml','formatting','codemirror','bootstrap'],function($,ju,summernote){
+require(['jquery','jqueryui','bootstrap','codemirror','xml','formatting','summernote'],function($,ju,summernote){
 
 $(function(){
 if ($('.summernote').length > 0) {
