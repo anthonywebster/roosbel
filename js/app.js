@@ -1,42 +1,7 @@
-require(['jquery','jqueryui','bootstrap','codemirror','xml','formatting','summernote'],function($,ju,summernote){
-
-$(function(){
-if ($('.summernote').length > 0) {
-
-    $('.summernote').summernote({
-      focus: true,
-      codemirror: { // codemirror options
-        theme: 'monokai'
-      },
-      onImageUpload:function(files,editor,welEditable){
-        sendFile(files[0],editor,welEditable);
-      },
-
-      onkeyup:function(e){
-        
-      }    
-    });
-};
-});
+require(['jquery','jqueryui','modules/redactor'],function($,ui,redactor){
 
 var files=[];
   
-function sendFile(file,editor,welEditable) {
-    data = new FormData();
-    data.append("file", file);
-    $.ajax({
-        data: data,
-        type: "POST",
-        url: "imgredactor.php",
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(url) {
-            editor.insertImage(welEditable,url);
-        }
-  });
-}          
-
 
 var Template = (function() {
     'use strict';

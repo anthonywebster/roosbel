@@ -1,13 +1,12 @@
 require.config({
 	baseUrl:"js/vendor",
+	paths:{
+		modules:'../modules',
+	},
 	shim:{
 		'bxslider': {
 			deps:['jquery'],
 			exports:'bxslider'
-		},
-		'jqueryui':{
-			deps:['jquery'],
-			exports:'jqueryui'
 		},
 		'bootstrap':{
 			deps:['jquery','jqueryui'],
