@@ -1,11 +1,10 @@
 define(['jquery'],function($){
 
 	var Template;
-	
-	Template = (function() {
 
-	    function Template (args) {};
+	return Template = (function() {
 
+	    Template = function(args) {}
 
 	    Template.prototype.templatePage = function(first_argument) {
 	        var template = $('<div>',{
