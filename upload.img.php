@@ -24,11 +24,6 @@ if ($_POST['gallery']) {
 
     $postGallery = array(
         'status' => (int)1,
-        'title' => $title,
-        'title_es' => $title_es,
-        'description' => $desc,
-        'description_es' => $desc_es,
-        'status' => (int)$_POST["status"],
     );
     if ( $infoGallery_count > 0) {
         $db->update('galleries',$postGallery,"id=$infoGallery->id");
@@ -37,9 +32,9 @@ if ($_POST['gallery']) {
         $db->insert('galleries',$postGallery);
         $id = $db->insert_id;
     }
-    if ($_FILES) {
+    if (!empty($_FILES['img']['tmp_name'])) {
 
-        foreach ($_FILES as $key => $value) {
+        foreach ($_FILES['img']['tmp_name'] as $key => $value) {
             $key++;
             $position = $key + $position_image; 
             $postpic = array(
@@ -47,11 +42,11 @@ if ($_POST['gallery']) {
                 'position' => $position,
             );
 
-            $tmp= $value['tmp_name'];
+            $tmp= $value;
 
             $db->insert('galpics',$postpic);
             $pic = new SimpleImage();
-            $pic->load($value['tmp_name']);
+            $pic->load($value);
 
             $pic->resizeTowidth(650);
             $pic->save("media/gallery/".$id.".".$position.".jpg");
@@ -62,7 +57,8 @@ if ($_POST['gallery']) {
 
         }
     }
-    die(json_encode($id));
+    $answer =['id' => $id,'type' => 'Gallery'];
+    die(json_encode($answer));
 } elseif ($_POST['slide']) {
 
         if (!empty($_FILES['img']['tmp_name'])) {

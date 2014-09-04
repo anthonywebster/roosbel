@@ -45,9 +45,8 @@ var uploadFiles = function (object) {
     })
 
     if (object.hasOwnProperty('inputs')) {
-
         object.inputs.forEach(function(value,index){
-            data.append(index,$('#'+value).val());
+            data.append(value,$('#'+value).val());
         })
     };
 
@@ -85,9 +84,8 @@ var uploadFiles = function (object) {
             return myXhr
         },
         success: function (data,status,test) {
-            if (data.status==true) {
-                location.reload();
-                //location.href = "cms.slide.php?id="+data+"&sms=1#last";
+            if (data.type = "Gallery") {
+                location.href = "cms.gallery.php?id="+data.id+"&sms=1#last";
             }
         }
     });
@@ -167,6 +165,19 @@ $('input[name="images[]"]').on('change',saveFiles);
             //inputs :['title'],
             config:{
                 slide:true,
+            }
+        }
+        uploadFiles(object);
+    }); 
+
+    $('.upload_gallery').on('submit',function(){        
+        // Este objeto contine los datos que se va a enviar en el post
+        // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
+        
+        var object = {
+            inputs :['id'],
+            config:{
+                gallery:true,
             }
         }
         uploadFiles(object);
