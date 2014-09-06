@@ -4,6 +4,13 @@ $slide = true;
 $id = $_GET['id'];
 $pics = $db->query("SELECT * FROM slide WHERE status = 1");
 
+if ($_GET['idimg']) {
+    $id = (int)$_GET['idimg'];
+    $db->query("UPDATE slide SET status = 0 WHERE id = $id");
+    header("Location:cms.slide.php");
+    exit();
+}
+
 if ($_POST['update']) {
 
     $id  = $_POST['id_img'];

@@ -84,14 +84,14 @@ var uploadFiles = function (object) {
             return myXhr
         },
         success: function (data,status,test) {
-            if (data.type = "Gallery") {
+            if (data.type == "Gallery") {
                 location.href = "cms.gallery.php?id="+data.id+"&sms=1#last";
+            } else if(data.type == 'slide') {
+                location.reload();
             }
         }
     });
 };
-
-
 
 function deletePage() {
     self = $(this);
@@ -175,12 +175,59 @@ $('input[name="images[]"]').on('change',saveFiles);
         // input = son los nombre de los inputs y a dicho inputs se le debe de poner un id con el mismo nombre,config es para otro parametros que necesitas en el php
         
         var object = {
-            inputs :['id'],
+            inputs :['id','title'],
             config:{
                 gallery:true,
             }
         }
         uploadFiles(object);
     }); 
+
+function calHeight (argument) {    
+    setTimeout(function() {
+        content_tab = $('.content-tab').height();
+
+        if (content_tab <= 650) {
+            $('html,body').css({'height':'100%','min-height':'auto'});
+        } else if(content_tab > 650) { 
+            $('html,body').css({'min-height':'100%','height':'auto'});
+        } 
+    }, 1);
+};
+
+function currentHash (argument) {
+    this.hash = window.location.hash.split("#")[1];
+    return hash;
+}
+
+function tabActive (hash) {
+    $('.tab').removeClass('active');
+    $('span.tab.'+hash).addClass('active');
+}
+
+tabActive(currentHash());
+calHeight();
+
+function changeHash (nameHash) {
+    window.location.hash ="#"+nameHash;
+}
+
+$('span.tab').on('click',function(){
+    nameHash = $(this).data('namehash');
+    changeHash(nameHash);
+    $('.tab').removeClass('active');
+    $(this).addClass('active');
+    calHeight();
+});
+
+
+$('.enlace').on('click',function(){
+    calHeight();
+    tabActive(hash);
+});
+
+/*
+Esto es para ocultar algunos inputs del login cuando se va a loguear la persona
+ */
 
 });

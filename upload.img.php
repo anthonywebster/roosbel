@@ -24,6 +24,7 @@ if ($_POST['gallery']) {
 
     $postGallery = array(
         'status' => (int)1,
+        'title' => html($_POST['title']),
     );
     if ( $infoGallery_count > 0) {
         $db->update('galleries',$postGallery,"id=$infoGallery->id");
@@ -59,6 +60,7 @@ if ($_POST['gallery']) {
     }
     $answer =['id' => $id,'type' => 'Gallery'];
     die(json_encode($answer));
+
 } elseif ($_POST['slide']) {
 
         if (!empty($_FILES['img']['tmp_name'])) {
@@ -83,7 +85,7 @@ if ($_POST['gallery']) {
 
             }
         }
-    $status =['status'=>true];
+    $status =['status'=>true,'type'=>'slide'];
     die(json_encode($status));
 }
 ?>

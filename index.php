@@ -1,6 +1,7 @@
 <?php 
 require "function.php";
 $index = true;
+$slide = $db->query("SELECT * FROM slide WHERE status = 1");
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -51,11 +52,15 @@ $index = true;
 
             <div id="slider" class="">
                 <ul class="clearfix bxslider">
-                    <li><img src="img/1.jpg" alt=""></li>
-                    <li><img src="img/7.jpg" alt=""></li>
-                    <li><img src="img/37.jpg" alt=""></li>
-                    <li><img src="img/38.jpg" alt=""></li>
-                    <li><img src="img/39.jpg" alt=""></li>
+                    <?php if ($slide->num_rows) {
+                        while ($row = $slide->fetch()) {
+                            if ($row['link']) { ?>
+                                <li><a href="<?php echo $row['link'] ?>"><img src="media/slide/<?php echo $row['id'] ?>.jpg" alt=""></a></li>
+                            <?php } else { ?>
+                                <li><img src="media/slide/<?php echo $row['id'] ?>.jpg" alt=""></li>
+                            <?php }
+                        }
+                    } ?>
                 </ul>
             </div>
             

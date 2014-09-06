@@ -1,6 +1,6 @@
 <?php 
 require_once "function.php"; 
-$slide = true;
+$gallery_true = true;
 $id = (int)$_GET['id'];
 
 $infoGallery_count = 0;
@@ -57,6 +57,7 @@ $list_gallery = $db->query("SELECT * FROM galleries ORDER BY id DESC");
             .content-img li img{padding-bottom:3px;}
             .content-img li input[type="file"]{width: 100%;margin:5px 0px 7px 0px;}
             .content-img .img-limit{margin-bottom:5px;}
+            a.enlace{color:#5ac;}
         </style>
     </head>
     <body class="">
@@ -96,39 +97,74 @@ $list_gallery = $db->query("SELECT * FROM galleries ORDER BY id DESC");
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="content-tab">
+                        <div class="list-tab">
+                            <span class="tab last" data-namehash="last"><?php echo isset($_GET['id']) ? 'Gallery' : 'New Gallery' ?></span>
+                            <span class="tab list" data-namehash="list">List</span>
+                        </div>
+                        <!-- ********************** --> 
+                        <div class="redactor target" id="last">
+                                <div>
+                                    <label for="">Título de Galería</label>
+                                    <input type="text" class="form-control" id="title" required value="<?php echo $infoGallery->title ? $infoGallery->title :'' ?>">
+                                </div>
+                                <div class="form-group">
+                                     <ul class="clearfix content-img">
+                                        <?php if ($pics->num_rows) { ?>
+                                             <?php while ($row = $pics->fetch()) { $imgurl = "media/gallery/$id.th.{$row['position']}.jpg" ; ?>
+                                                <?php if (file_exists($imgurl)) { ?>
+                                                    <li>
+                                                        <a href="cms.gallery.php?pos=<?php echo $row['position'] ?>&idimg=<?php echo $row['id'] ?>&id=<?php echo $id ?>"><span class="x">X</span></a>
+                                                        <div class="img-limit">
+                                                            <img src="<?php echo $imgurl ?>" alt="">
+                                                        </div>
+                                                    </li>
+                                               <?php } ?>
+                                             <?php } ?>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            <form action="" method="post" class="normal upload_gallery">               
 
-                    <div class="redactor">
-                            <div class="form-group">
-                                 <ul class="clearfix content-img">
-                                    <?php if ($pics->num_rows) { ?>
-                                         <?php while ($row = $pics->fetch()) { $imgurl = "media/gallery/$id.th.{$row['position']}.jpg" ; ?>
-                                            <?php if (file_exists($imgurl)) { ?>
-                                                <li>
-                                                    <a href="cms.gallery.php?pos=<?php echo $row['position'] ?>&idimg=<?php echo $row['id'] ?>&id=<?php echo $id ?>"><span class="x">X</span></a>
-                                                    <div class="img-limit">
-                                                        <img src="<?php echo $imgurl ?>" alt="">
-                                                    </div>
-                                                </li>
-                                           <?php } ?>
-                                         <?php } ?>
+                                <input type="file" name="images[]" id="img" class="input-file" multiple />
+
+                                 <div id="holder" class="save-pic">
+                                    <ul id="containerthumb" class="thumbs">
+                                        
+                                    </ul>
+                                </div>
+                                <div class="progreso"><div class="barra"></div><div class="porcentaje"></div></div>
+                                    <input type="hidden" name="id" value="<?php echo $id ?>" id="id">
+
+                                <input type="submit" class="btn btn-success" value="Guardar">
+                            </form>
+
+                        </div>
+
+                        <div id="list" class="target">
+                            <h5>List</h5>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ( $row=$list_gallery->fetch()) { ?>
+                                        <tr>
+                                            <td><?php echo $row['title'] ?></td>
+                                            <td><?php echo $row['status'] == 1 ? "Active" : "Inactive" ?></td>
+                                            <td><a href="cms.gallery.php?id=<?php echo $row['id'] ?>#last" class="enlace"><i class="fa fa-pencil"></i> Edit</a> <a href=""></td>
+                                        </tr>
                                     <?php } ?>
-                                </ul>
-                            </div>
-                        <form action="" method="post" class="normal upload_gallery">               
-
-                            <input type="file" name="images[]" id="img" class="input-file" multiple />
-
-                             <div id="holder" class="save-pic">
-                                <ul id="containerthumb" class="thumbs">
-                                    
-                                </ul>
-                            </div>
-                            <div class="progreso"><div class="barra"></div><div class="porcentaje"></div></div>
-                                <input type="hidden" name="id" value="<?php echo $id ?>" id="id">
-
-                            <input type="submit" class="btn btn-success" value="Guardar">
-                        </form>
-
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- -->
                     </div>
                 </div>
             </div>
