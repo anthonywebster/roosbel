@@ -1,13 +1,3 @@
-/**
- * Super simple wysiwyg editor on Bootstrap v0.5.2
- * http://hackerwins.github.io/summernote/
- *
- * summernote.js
- * Copyright 2013 Alan Hong. and outher contributors
- * summernote may be freely distributed under the MIT license./
- *
- * Date: 2014-04-28T17:58Z
- */
 (function (factory) {
   /* global define */
   if (typeof define === 'function' && define.amd) {
