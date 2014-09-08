@@ -4,6 +4,11 @@ $pages = true;
 $id = $_GET['id'];
 $inmenu = $_GET['menu']==1 ? 1 : 0;
 
+if (!isset($_COOKIE['user_roosbelt'])) {
+    header("Location:cms.login.php?login=true");
+    exit();
+}
+
 if ($id) {
     $info = $db->query("SELECT * FROM pages WHERE id = $id AND status = 1 LIMIT 1 ");
 }

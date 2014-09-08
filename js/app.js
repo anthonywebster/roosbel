@@ -7,7 +7,6 @@ Template = new Template();
 var saveFiles = function (event) {
     var files_thumb = event.target.files;
     var containerthumb = $('#containerthumb');
-
     $.each(files_thumb,function(index,value){
         // Aqui almaceno en el arreglo files las imagenes seleccionadas
         files.push(value);
@@ -29,6 +28,7 @@ var saveFiles = function (event) {
         })(value);
         reader.readAsDataURL(value);
     }); // fin del foreach
+
 }
 
 var DeleteToArray = function (position) {

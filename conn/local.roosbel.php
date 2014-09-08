@@ -1,6 +1,6 @@
 <?php
-   define("SERVER","localhost");
+   define("SERVER","sydney");
    define("USER","root");
-   define("PASSWORD","webster1990");
+   define("PASSWORD","vangogh");
    define("DATABASE","roosbel");
 ?>

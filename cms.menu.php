@@ -2,6 +2,11 @@
 require_once "function.php"; 
 $page_menu = true;
 
+if (!isset($_COOKIE['user_roosbelt'])) {
+    header("Location:cms.login.php?login=true");
+    exit();
+}
+
 if ($_GET['delete']) {
     $id = (int)$_GET['delete'];
     delete($id);

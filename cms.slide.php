@@ -4,6 +4,11 @@ $slide = true;
 $id = $_GET['id'];
 $pics = $db->query("SELECT * FROM slide WHERE status = 1");
 
+if (!isset($_COOKIE['user_roosbelt'])) {
+    header("Location:cms.login.php?login=true");
+    exit();
+}
+
 if ($_GET['idimg']) {
     $id = (int)$_GET['idimg'];
     $db->query("UPDATE slide SET status = 0 WHERE id = $id");

@@ -53,7 +53,7 @@ if ($_POST['gallery']) {
             $pic->save("media/gallery/".$id.".".$position.".jpg");
 
             $pic->resizeTowidth(200);
-            $pic->save("media/gallery/".$id.".th.".$position.".jpg");
+            $pic->save("media/gallery/thumb/".$id.".th.".$position.".jpg");
 
 
         }

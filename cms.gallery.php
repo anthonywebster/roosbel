@@ -3,6 +3,11 @@ require_once "function.php";
 $gallery_true = true;
 $id = (int)$_GET['id'];
 
+if (!isset($_COOKIE['user_roosbelt'])) {
+    header("Location:cms.login.php?login=true");
+    exit();
+}
+
 $infoGallery_count = 0;
 $position_image = 0;
 
@@ -15,6 +20,13 @@ if ($_GET['pos']) {
     $db->query("DELETE FROM galpics WHERE id = $idimg");
     header("location:cms.gallery.php?id=$id#last");
     die();
+}
+
+if ($_GET['degallery']) {
+    $id = (int)$_GET['degallery'];
+    $db->query("UPDATE galleries SET status = 0 WHERE id = $id");
+    header("Location:cms.gallery.php#list");
+    exit();
 }
 
 if ($id) {    
@@ -112,7 +124,7 @@ $list_gallery = $db->query("SELECT * FROM galleries ORDER BY id DESC");
                                 <div class="form-group">
                                      <ul class="clearfix content-img">
                                         <?php if ($pics->num_rows) { ?>
-                                             <?php while ($row = $pics->fetch()) { $imgurl = "media/gallery/$id.th.{$row['position']}.jpg" ; ?>
+                                             <?php while ($row = $pics->fetch()) { $imgurl = "media/gallery/thumb/$id.th.{$row['position']}.jpg" ; ?>
                                                 <?php if (file_exists($imgurl)) { ?>
                                                     <li>
                                                         <a href="cms.gallery.php?pos=<?php echo $row['position'] ?>&idimg=<?php echo $row['id'] ?>&id=<?php echo $id ?>"><span class="x">X</span></a>
@@ -159,6 +171,7 @@ $list_gallery = $db->query("SELECT * FROM galleries ORDER BY id DESC");
                                             <td><?php echo $row['title'] ?></td>
                                             <td><?php echo $row['status'] == 1 ? "Active" : "Inactive" ?></td>
                                             <td><a href="cms.gallery.php?id=<?php echo $row['id'] ?>#last" class="enlace"><i class="fa fa-pencil"></i> Edit</a> <a href=""></td>
+                                            <td><a href="cms.gallery.php?degallery=<?php echo $row['id'] ?>#list" class="enlace"><i class="fa fa-times"></i> Eliminar</a> <a href=""></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

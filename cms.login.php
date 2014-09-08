@@ -16,33 +16,11 @@ if ($_POST['register']) {
     exit();
 }
 
-function loginValidate($email,$pass)
-{
-    global $db;
-    $email = html($email);
-
-    $user = $db->query("SELECT * FROM users WHERE mail = $email AND status = 1");
-
-    if (!$user->num_rows) {
-        return false;
-    }
-
-    $check = encrypt($user->id.$pass);
-    if ($check == $user->password) {
-        $db->query("UPDATE users SET last_login = NOW() WHERE id = {$user->id}");
-        $data = encrypt($password.$user->id).$user->id;
-        setcookie("user_roosbelt",$data,time()+60*60*24,"/");
-        return true;
-    } else {
-        return false;
-    }
-}
-
 if ($_POST['login']) {
     $email = $_POST['email'];
     $password = $_POST['pass'];
     if (loginValidate($email,$password)) {
-        header("Location:cms.login.php?login=true");
+        header("Location:cms.page.php?login=true");
         exit();
     } else {
         header("Location:cms.login.php?login=true");

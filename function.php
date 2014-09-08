@@ -67,6 +67,7 @@ $head_cms = '
 <script src="js/vendor/require.js" data-main="js/main.js"></script>
 ';
 
+
 $menu_principal = $db->query("SELECT SQL_CACHE name,id,parent_page,link FROM pages WHERE status = 1 AND inmenu = 1 ORDER BY id");
 
 while ($row = $menu_principal->fetch()) {
@@ -81,6 +82,37 @@ function delete($id) {
     global $db;
     $db->query("UPDATE pages SET status = 0 WHERE id = $id");
     return die('true');
+}
+
+function loginValidate($email,$pass)
+{
+    global $db;
+    $email = html($email);
+
+    $user = $db->query("SELECT * FROM users WHERE mail = $email AND status = 1");
+
+    if (!$user->num_rows) {
+        return false;
+    }
+
+    $check = encrypt($user->id.$pass);
+    if ($check == $user->password) {
+        $db->query("UPDATE users SET last_login = NOW() WHERE id = {$user->id}");
+        $data = encrypt($password.$user->id).$user->id;
+        setcookie("user_roosbelt",$data,time()+60*60*24,"/");
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function searchImg($id) {
+    global $db;
+    $info = $db->query("SELECT position FROM galpics WHERE galleries = $id AND status = 1 LIMIT 1");
+    if ($info->num_rows) {
+        return $info->position;
+    }
+    return false;
 }
 
 ?>
