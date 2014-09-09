@@ -64,7 +64,7 @@ $head_cms = '
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css">
-<script src="js/vendor/require.js" data-main="js/main.js"></script>
+<script src="js/vendor/require.js" data-main="js/main"></script>
 ';
 
 
