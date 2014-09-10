@@ -41,7 +41,7 @@ if ($id) {
     }
 } 
 
-$list_gallery = $db->query("SELECT * FROM galleries ORDER BY id DESC");
+$list_gallery = $db->query("SELECT * FROM galleries WHERE status = 1  ORDER BY id DESC");
 
 ?>
 <!DOCTYPE html>

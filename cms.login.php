@@ -20,7 +20,7 @@ if ($_POST['login']) {
     $email = $_POST['email'];
     $password = $_POST['pass'];
     if (loginValidate($email,$password)) {
-        header("Location:cms.page.php?login=true");
+        header("Location:cms.page.php");
         exit();
     } else {
         header("Location:cms.login.php?login=true");
