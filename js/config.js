@@ -1,5 +1,4 @@
 require.config({
-	baseUrl:'js/vendor',
 	paths:{
 		modules:'../modules',
 	},
