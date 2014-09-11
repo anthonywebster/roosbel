@@ -30,4 +30,5 @@ require.config({
 	}
 });
 
+
 require(['modules/app']);
