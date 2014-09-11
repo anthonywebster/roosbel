@@ -80,8 +80,8 @@ if ($_POST['login']) {
                              <div class="form form_login">
                                 <div class="content-form form_login">
                                     <form action="" method="post" class="form-register">
-                                        <input type="email" name="email" class="email_origen" placeholder="Email">
-                                        <input type="password" name="pass" class="pass_origen" placeholder="password">                                
+                                        <input type="email" name="email" class="email_origen" placeholder="Email" required>
+                                        <input type="password" name="pass" class="pass_origen" placeholder="password" required>                                
                                         <input type="hidden" name="login" value="yes">
                                         <button type="submit" class="next btn btn-success" >Enviar</button>
                                     </form>
@@ -92,11 +92,11 @@ if ($_POST['login']) {
                            <div class="form">
                                 <div class="content-form">
                                     <form action="" method="post" class="form-register">
-                                        <input type="text" placeholder="Name" value="" name="name" class="name">
-                                        <input type="email" name="email" class="email_origen" placeholder="Email">
-                                        <input type="email" class="email_eval" placeholder="Repeat Email">
-                                        <input type="password" name="pass" class="pass_origen" placeholder="password">
-                                        <input type="password" class="pass_eval" placeholder="Repeat your password">
+                                        <input type="text" placeholder="Name" value="" name="name" class="name" required>
+                                        <input type="email" name="email" class="email_origen" placeholder="Email" required>
+                                        <input type="email" class="email_eval" placeholder="Repeat Email" required>
+                                        <input type="password" name="pass" class="pass_origen" placeholder="password" required>
+                                        <input type="password" class="pass_eval" placeholder="Repeat your password" required>
                                         <input type="hidden" name="register" value="yes">
                                         <button type="submit" class="next btn btn-success" >Enviar</button>
                                     </form>

@@ -1,4 +1,5 @@
 require.config({
+	baseUrl:'js/vendor',
 	paths:{
 		modules:'../modules',
 	},
@@ -30,4 +31,4 @@ require.config({
 	}
 });
 
-require(['modules/logic'],function(){})
+require(['modules/app']);

@@ -1,4 +1,4 @@
-require(['jquery','modules/redactor','modules/menu'],function($,redactor,Template){
+define(['jquery','modules/redactor','modules/menu'],function($,redactor,Template){
 
 var files=[];
 

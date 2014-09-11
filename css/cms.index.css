@@ -37,6 +37,6 @@ form.page .col-md-6 .fa{margin:3px}
 form.page .col-md-6 label{display:block}
 .form{width:404px;height:369px;background-color:rgba(250,250,250,0.3);margin:0 auto;}
 .form .content-form{padding:10px}
-.form input{width:100%;padding:10px;margin:6px 0 4px 0;border:1px solid transparent;}
+.form input{width:100%;padding:10px;margin:6px 0 4px 0;border:1px solid transparent;-webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;transition:all 0.5s;}
 .form input:focus{outline:0;border:1px solid #3498db}
 .form.form_login{height:auto}

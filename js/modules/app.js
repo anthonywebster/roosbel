@@ -1,8 +1,8 @@
-define(['jquery','modules/redactor','modules/menu'],function($,redactor,Template){
+require(['jquery','modules/redactor','modules/menu','modules/validate_form'],function($,redactor,Template,validateForm){
 
 var files=[];
 
-Template = new Template();
+new validateForm();
 
 var saveFiles = function (event) {
     var files_thumb = event.target.files;
