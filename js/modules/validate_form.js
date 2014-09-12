@@ -12,18 +12,19 @@ return validateForm = (function() {
 		var foo = 5;
 
 		$('.form-register').on('submit',function(event){
-			event.preventDefault();
+
 			var 
 			email1 = $('.email_origen'),
 			email2 = $('.email_eval'),
 			pass1  = $('.pass_origen'),
 			pass2  = $('.pass_eval');
 
-			// if (_this.validateExistEmail(email1)) {
-			// 	console.log('test');
-			// }
-			_this.validateExistEmail(email1,email2);		
+			_this.validateEmail(email1,email2);		
 			_this.validatePass(pass1,pass2);
+		});
+
+		$('.email_origen').on('blur',function(event){
+			_this.validateExistEmail($(this));
 		});
 
 		
@@ -37,7 +38,7 @@ return validateForm = (function() {
 		console.log('hola');
 	};
 
-	validateForm.prototype.validateExistEmail = function(email1,email2) {
+	validateForm.prototype.validateExistEmail = function(email1) {
 		//Esta variable la declaro aqui para poder usar los metodos ya creados.
 		var _this = this;
 		$.ajax({
@@ -46,12 +47,14 @@ return validateForm = (function() {
 			dataType:'json',
 			data: {email:email1.val()},
 			success: function (data) {
-				if (data.status == "empty") {
-					_this.validateEmail(email1,email2);
-				} else {
-					email1.val("");
-					email2.val("");
-				}
+				if (data.status == "exist") {
+					email1.css({'background-color':'#F96464!important','color':'white'});
+					email1.val("Este correo ya existe");
+					
+					setTimeout(function() {
+						email1.css({'background-color':'#FFF','color':'#000'}).val('');
+					}, 2000);
+				} 
 			},
 		});
 
